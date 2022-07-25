@@ -1,0 +1,105 @@
+import  sys
+
+""" Exercise 3
+Driver : Betty Kouadio
+Navigator : Samantha Karl
+Creates a class car which  will keep track of its location, its orientation, and the amount of gas in the tank
+ In addition, will be able to drive forward or in reverse, turn left or right,and refill its gas tank.
+ Signed off by Mr.  Maxwell Morris 
+
+"""
+
+class Car :
+    """ The car class  will keep track of its location, its orientation, and the amount of gas in the tank
+         In addition, will be able to drive forward or in reverse, turn left or right,and refill its gas tank.
+         
+    """
+    def __init__(self):      # setting values to x , y orientation and gas
+        """ Parameter : x, y , orient, and gas
+            This function set  the attributes to x=0 , y=0, orient = "n" for the coordination of the car, and gas=10.0
+        """
+        self.x = 0
+        self.y = 0
+        self.orient = "n"
+        self.gas = 10.0
+
+    def driver(self,reverse=False):   #Changing the orientation  
+        """
+            Parameters : self, and  reverse. reserver is boolean where  the value is set to false
+            This funcion raise  raise a RuntimeError if the gas level is less that 0.2
+            This function  also changes the direction of the car and decreases the gas level by 0.2
+        """
+        if self.gas < 0.2 :
+            raise RuntimeError(" The gas is less than .02")
+        else:
+            if reverse== False:   # if car not reverse then
+                if self.orient== "n":
+                    self.y -=1
+                elif self.orient == "s":
+                    self.y +=1
+                elif self.orient=="w":
+                    self.x -=1
+                elif self.orient=="e":
+                    self.x +=1
+            else:                          # if car is in reverse then
+                if self.orient== "n":
+                    self.y -=1
+                elif self.orient == "s":
+                    self.y +=1
+                elif self.orient=="w":
+                    self.x -=1
+                elif self.orient=="e":
+                    self.x +=1
+            self.gas -=0.2
+
+    def turn(self, dir):    # Turns the  car and changes orientation
+        """
+         parameters self and dir
+         This function changes the orientation of car depending upon turn direction
+         """
+        if dir =="r":
+            if self.orient=="n":
+                self.orient=="e"
+            elif self.orient == "s":
+                self.orient=="w"
+            elif self.orient=="w":
+                self.orient == "n"
+            elif self.orient=="e":
+                self.orient == "s"
+
+        if dir == "l":
+            if self.orient=="w":
+                self.orient == "s"
+            elif self.orient=="e":
+                self.orient=="n"
+            elif self.orient=="s":
+                self.orient=="e"
+            elif self.orient=="n":
+                self.orient=="w"
+
+    def refill(self):
+        """
+        Parameter : self
+        Return: This function refill the gas so changes gas value to 10.0
+        """
+        self.gas=10.0
+
+    def status(self):
+        """ Parameter : self
+            This function shows the position, orientation and gas level of car
+        """
+        print("Car current position is (x,y) = (",self.x," , ",self.y, " )")
+        print("Car orientations is ",self.orient)
+        print("Car Gas = ",self.gas)
+
+
+if __name__ == "__main__":
+        car = Car()
+
+        car.driver()
+
+        car.turn("l")
+
+        car.refill()
+
+        car.status()
